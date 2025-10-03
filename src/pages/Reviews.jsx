@@ -2,10 +2,9 @@ import React, { useState, useEffect, useMemo } from "react";
 import { TeaReview } from "@/entities/TeaReview";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Filter, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import ProductSummaryCard from "../Components/review/ProductSummaryCard";
-import ReviewCard from "../Components/review/ReviewCard";
+import { Search, Filter } from "lucide-react";
+import ProductSummaryCard from "@/components/ProductSummaryCard";
+import ReviewCard from "@/components/ReviewCard";
 import {
   Dialog,
   DialogContent,
@@ -89,29 +88,19 @@ export default function Reviews() {
     return filtered;
   }, [groupedProducts, searchTerm, filterType, sortBy]);
 
-
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-sage-800 mb-3">
             お茶商品一覧
           </h1>
           <p className="text-sage-600 text-lg">
             {groupedProducts.length}種類のお茶商品がレビューされています
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-8 border border-sage-200"
-        >
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-8 border border-sage-200">
           <div className="grid md:grid-cols-3 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sage-400 w-5 h-5" />
@@ -152,41 +141,24 @@ export default function Reviews() {
               </SelectContent>
             </Select>
           </div>
-        </motion.div>
+        </div>
 
-        <AnimatePresence mode="popLayout">
-          {filteredProducts.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center py-20"
-            >
-              <p className="text-sage-500 text-lg">商品が見つかりませんでした</p>
-            </motion.div>
-          ) : (
-            <motion.div
-              layout
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {filteredProducts.map((product) => (
-                <motion.div
-                  key={product.janCode || product.reviews[0].id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ProductSummaryCard
-                    product={product}
-                    onClick={() => setSelectedProduct(product)}
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {filteredProducts.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-sage-500 text-lg">商品が見つかりませんでした</p>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <div key={product.janCode || product.reviews[0].id}>
+                <ProductSummaryCard
+                  product={product}
+                  onClick={() => setSelectedProduct(product)}
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
         <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
           <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col">
@@ -199,9 +171,9 @@ export default function Reviews() {
                 </DialogHeader>
 
                 <div className="flex-1 overflow-y-auto pr-4 -mr-4 space-y-6">
-                    {selectedProduct.reviews.map(review => (
-                        <ReviewCard key={review.id} review={review} onClick={() => {}} />
-                    ))}
+                  {selectedProduct.reviews.map(review => (
+                    <ReviewCard key={review.id} review={review} />
+                  ))}
                 </div>
               </>
             )}

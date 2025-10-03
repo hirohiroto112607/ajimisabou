@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, MessageSquare } from "lucide-react";
+import { Star, TrendingUp, Users } from "lucide-react";
 
 const teaTypeColors = {
   "緑茶": "bg-green-100 text-green-800 border-green-200",
@@ -15,12 +15,12 @@ const teaTypeColors = {
 
 export default function ProductSummaryCard({ product, onClick }) {
   return (
-    <Card 
-      className="overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer bg-white/90 backdrop-blur-sm border-sage-200 group"
+    <Card
       onClick={onClick}
+      className="overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer bg-white/90 backdrop-blur-sm border-sage-200 group"
     >
       {product.latestImage && (
-        <div className="relative h-56 overflow-hidden bg-gradient-to-br from-sage-50 to-beige-50">
+        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-sage-50 to-beige-50">
           <img 
             src={product.latestImage} 
             alt={product.teaName}
@@ -42,16 +42,25 @@ export default function ProductSummaryCard({ product, onClick }) {
       
       <CardContent className="space-y-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-1 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-200">
+          <div className="flex items-center gap-1">
             <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-            <span className="font-bold text-amber-700">{product.avgRating.toFixed(1)}</span>
-            <span className="text-sm text-amber-600">/ 平均</span>
+            <span className="font-bold text-amber-700">
+              {product.avgRating.toFixed(1)}
+            </span>
           </div>
-          <div className="flex items-center gap-2 text-sage-600">
-            <MessageSquare className="w-4 h-4" />
-            <span className="text-sm font-medium">{product.reviewCount}件のレビュー</span>
+          <div className="flex items-center gap-1 text-sage-600">
+            <Users className="w-4 h-4" />
+            <span className="text-sm font-medium">
+              {product.reviewCount}件のレビュー
+            </span>
           </div>
         </div>
+        
+        {product.janCode && (
+          <div className="text-xs text-sage-400 font-mono">
+            JAN: {product.janCode}
+          </div>
+        )}
       </CardContent>
     </Card>
   );
