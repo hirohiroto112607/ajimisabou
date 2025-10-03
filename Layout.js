@@ -60,7 +60,7 @@ export default function Layout({ children }) {
                 <Leaf className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="font-bold text-lg text-sage-800">お茶レビュー</h2>
+                <h2 className="font-bold text-lg text-sage-800">味見茶房</h2>
                 <p className="text-xs text-sage-500">スーパーのお茶評価ブログ</p>
               </div>
             </div>
