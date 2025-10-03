@@ -1,0 +1,68 @@
+{
+  "name": "TeaReview",
+  "type": "object",
+  "properties": {
+    "jan_code": {
+      "type": "string",
+      "description": "商品のJANコード"
+    },
+    "tea_name": {
+      "type": "string",
+      "description": "お茶の商品名"
+    },
+    "supermarket": {
+      "type": "string",
+      "description": "購入したスーパーの名前"
+    },
+    "price": {
+      "type": "number",
+      "description": "価格(円)"
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "評価(1-5)"
+    },
+    "tea_type": {
+      "type": "string",
+      "enum": [
+        "緑茶",
+        "ほうじ茶",
+        "玄米茶",
+        "麦茶",
+        "烏龍茶",
+        "紅茶",
+        "その他"
+      ],
+      "description": "お茶の種類"
+    },
+    "volume": {
+      "type": "string",
+      "description": "容量(例: 500ml, 2L)"
+    },
+    "review_text": {
+      "type": "string",
+      "description": "レビュー本文"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "商品画像のURL"
+    },
+    "pros": {
+      "type": "string",
+      "description": "良い点"
+    },
+    "cons": {
+      "type": "string",
+      "description": "気になる点"
+    }
+  },
+  "required": [
+    "tea_name",
+    "supermarket",
+    "price",
+    "rating",
+    "tea_type"
+  ]
+}
